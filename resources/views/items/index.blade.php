@@ -1,7 +1,11 @@
-<div>
-    @foreach ($items as $item)
-        
-        <p>{{ $item->name }}</p>
+@extends('layouts.app')
 
-    @endforeach
-</div>
+@section('content')
+
+    <h1>What ot take</h1>
+
+    @include('layouts/search')
+    
+    @include('items/items')
+
+@endsection

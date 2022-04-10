@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ItemsController;
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +13,6 @@ use App\Http\Controllers\ItemsController;
 |
 */
 
-//Route::get('/', [PagesController::class, 'index']);
+Route::resource('/{name?}', ItemsController::class);
 
-Route::resource('/', ItemsController::class);
+//Route::get('search/{name}', );
