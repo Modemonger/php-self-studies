@@ -23,7 +23,7 @@ Or use the installer from https://getcomposer.org/
     laravel instalation guide https://laravel.com/docs/9.x/installation \
     Or install using composer: ``` composer global require laravel/installe ```
 
-4. Finally we will need npm which comes with Node.js.
+4. Finally we will need npm which comes with Node.js. \
     Node.js instalation guide can be found here https://nodejs.org/en/
 
 5. Install laravel dependencies using ``` composer install ```
