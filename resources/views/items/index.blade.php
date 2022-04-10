@@ -8,4 +8,6 @@
     
     @include('items/items')
 
+    @include('weather/weather')
+
 @endsection

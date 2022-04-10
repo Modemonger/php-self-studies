@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use App\Models\Item;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 function SKU_gen($string, $id = null){
     $results = '';
@@ -27,10 +30,33 @@ class ItemsController extends Controller
      */
     public function index(Request $request)
     {
-        $name = $request->name;
-        if (isset($name)) {
-            $items = Item::where('name', 'like', '%'.$name.'%')->get();
-            return view('items.index',compact('items'));
+        $city = $request->name;
+        $city = strip_tags($city);
+        $city = Str::lower($city);
+        
+        if (isset($city) && $city != '') {
+
+            $response = Http::get('https://api.meteo.lt/v1/places/'.$city.'/forecasts/long-term');
+            $response->json();
+            foreach ($response['forecastTimestamps'] as $key => $value) {
+                $value['forecastTimeUtc'] = new Carbon($value['forecastTimeUtc']);
+                $value['forecastTimeUtc'] = $value['forecastTimeUtc']->setTimeZone('Europe/Vilnius');
+            }
+
+            $date = array(Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'), 'UTC'));
+            $date[0] = $date[0]->setTimeZone('Europe/Vilnius');
+
+            $result = array_filter($response['forecastTimestamps'], 
+                function ($datetime) use ($date) {
+                    return $datetime['forecastTimeUtc'] > $date[0];
+                });
+
+            $data = [
+                'place'=>$response['place'],
+                'forecastTimestamps'=>array_slice($result, 0, 5),
+            ];
+
+            return view('items.index',compact('data'));
         }
 
         return view('items.index');
@@ -54,6 +80,12 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'name' => 'required',
+            'price' => ['required', 'integer'],
+        ]);
+
         $item = new Item;
         $item->sku = SKU_gen($request->input('name'), 2);
         $item->name = $request->input('name');
@@ -87,7 +119,7 @@ class ItemsController extends Controller
             });
         $item->save();
 
-        return redirect('/');
+        return view('items.index');
     }
 
     /**

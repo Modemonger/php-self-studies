@@ -13,6 +13,6 @@ use App\Http\Controllers\ItemsController;
 |
 */
 
-Route::resource('/{name?}', ItemsController::class);
+Route::get('/{name?}', [ItemsController::class, 'index'])->name('home');
 
-//Route::get('search/{name}', );
+Route::resource('/resource', ItemsController::class);

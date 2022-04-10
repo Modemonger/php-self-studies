@@ -1,4 +1,4 @@
-<form class="search-container" action="/" method="GET" role="search">
+<form class="search-container" action="{{ route('home') }}" method="GET" role="index">
     @csrf
     <div class="input-group">
 
