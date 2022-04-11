@@ -1,13 +1,10 @@
 <form class="search-container" action="{{ route('home') }}" method="GET" role="index">
     @csrf
-    <div class="input-group">
-
-        <input type="text" 
-            class="form-control" 
-            name="city"
-            placeholder="Search cities"> 
-            <span class="input-group-btn">
-            <button type="submit" class="btn-default">Submit</button>
-        </span>
+    <input type="search" 
+        class="search" 
+        name="city"
+        placeholder="Search cities"> 
+    <div class="btn-container">
+        <button type="submit" class="btn-default">Submit</button>
     </div>
 </form>

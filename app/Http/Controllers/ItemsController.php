@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Client\ConnectionException;
 use App\Models\Item;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -26,6 +27,7 @@ class ItemsController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
@@ -33,12 +35,28 @@ class ItemsController extends Controller
         $city = $request->city;
         $city = strip_tags($city);
         $city = Str::lower($city);
-        
+        $city = iconv('utf-8', 'ascii//TRANSLIT', $city);
+
         if (isset($city) && $city != '') 
         {
+            try{
+                $response = Http::get('https://api.meteo.lt/v1/places/'.$city.'/forecasts/long-term');
+                $response->json();
+                $c1 = $response->failed();
 
-            $response = Http::get('https://api.meteo.lt/v1/places/'.$city.'/forecasts/long-term');
-            $response->json();
+                $c2 = $response->clientError();
+
+                $c3 = $response->serverError();
+
+                if ($c1 or $c2 or $c3){
+                    $response->throw();
+                }
+                    
+            } catch(\Exception $e){
+                //dd($e);
+                $error = $response->getStatusCode();
+                return view('error.error', compact('error'));
+            }
 
             foreach ($response['forecastTimestamps'] as $key => $value) 
             {
@@ -60,8 +78,14 @@ class ItemsController extends Controller
             
             $cloathes = array();
             foreach ($resault as $key => $value) {
+                
+                $value = Str::after($value['conditionCode'], '-');
+                // i basically made it just rain, cloud, clear
+                // so its eaier to find im so smart no way
+                $value = substr($value, 0, -1);
+
                 $item = Item::where('weather',
-                                'like', '%'.Str::after($value['conditionCode'], '-').'%')
+                                'like', '%'.$value.'%')
                 ->get();
                 
                 foreach ($item as $x)

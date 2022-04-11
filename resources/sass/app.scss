@@ -1,0 +1,232 @@
+@import './mixins';
+
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    @include flex-collumn;
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    align-items: center;
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%,
+                                 rgba(230,230,230,1) 50%,
+                                 rgba(255,255,255,1) 100%);
+    overflow-x: hidden;
+    .navigation{
+        position: absolute;
+        top: 0;
+        left: 2rem;
+        a{
+            @include base-text(1.5rem, 200);
+            text-decoration: none;
+            color: #000;
+        }
+    }
+    .app{
+        @include flex-collumn;
+        align-items: center;
+        width: 90%;
+        margin-top: 10rem;
+        h1{
+            @include base-text(2.7rem, 200);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .search-container{
+            @include flex-collumn;
+            width: 15rem;
+            input[type=search]{
+                @include base-text(1.5rem);
+                height: 2rem;
+                margin-bottom: 2rem;
+                border: 1px solid black;
+                background-color: transparent;
+                &::-webkit-search-cancel-button{
+                    -webkit-appearance: none;  
+                    height: 1em;
+                    width: 1em;
+                    border-radius: 50em;
+                    background: url(https://pro.fontawesome.com/releases/v5.10.0/svgs/solid/times-circle.svg);
+                    background-size: contain;
+                }
+                &:focus{
+                    border: 1px solid black;
+                    border-radius: 0;
+                    outline: none;
+                    background-color: transparent;
+                }
+                &:-webkit-autofill {
+                    box-shadow: none;
+                    -webkit-box-shadow: 0 0 0 30px #ffe44c10 inset !important;
+                }
+            }
+            .btn-container{
+                .btn-default{
+                    @include base-text(16px);
+                    width: 100%;
+                    padding: 13px 20px 13px;
+                    outline: 0;
+                    border: 1px solid black;
+                    cursor: pointer;
+                    position: relative;
+                    background-color: rgba(0, 0, 0, 0);
+                    user-select: none;
+                    touch-action: manipulation;
+                    &:after{
+                        width: 15rem;
+                        height: 3rem;
+                        transition: 0.2s;
+                        transform: translate(-9rem, -0.5rem);
+                        @include after-block;
+                    }
+                    &:hover:after {
+                        transform: translate(-9.3rem, -0.9rem);
+                    }
+                }
+                
+            }
+            
+        }
+        .weather-container{
+            @include flex-collumn;
+            width: 15rem;
+            justify-content: center;
+            margin: 2rem 0;
+            &:after{
+                width: 14rem;
+                height: 20rem;
+                transform: translate(1rem, 1rem);
+                @include after-block;
+            }
+            .city-name{
+                @include base-text(2rem, 600)
+            }
+            .forecast-container{
+                @include flex-collumn;
+                @include base-text();
+                align-items: flex-start;
+                min-width: 15rem;
+                .forecast{
+                    @include flex-collumn;
+                    width: 100%;
+                    margin-bottom: .5rem;
+                    *{
+                        margin: 0.2rem 0;
+                        &:nth-child(even){
+                            font-weight: 600;
+                            align-self: flex-end;
+                        } 
+                    }
+                    
+                }
+            }
+            @media (min-width: 825px) {
+                width: 30rem;
+                &:after{
+                    width: 30rem;
+                    height: 23rem;
+                }
+                .city-name{
+                    @include base-text(2.5rem, 600)
+                }
+                .forecast-container{
+                    @include flex-row;
+                    @include base-text(1.5rem);
+                    flex-wrap: wrap;
+                    min-width: 25rem;
+                    .forecast{
+                        @include flex-collumn;
+                        margin-bottom: .5rem;
+                        *{
+                            margin: 0.2rem 0;
+                            &:nth-child(even){
+                                font-weight: 600;
+                                align-self: flex-end;
+                            } 
+                        }
+                        
+                    }
+                }
+            }
+        }
+        .cloathes-container{
+            @include flex-collumn;
+            @include flex-center;
+            width: 90%;
+            margin-bottom: 3rem;
+            .recommendation{
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            .cloathes{
+                display: flex;
+                flex-wrap: wrap;
+                .item{
+                    @include flex-collumn;
+                    @include flex-center;
+                    @include base-text();
+                    margin: 0.5rem 0.8rem;
+                    text-shadow: 4px 4px 7px rgba(0,0,0,0.35);
+                    *{
+                        margin: 0.25rem;
+                    }
+                    .name{
+                        font-weight: 600;
+                    }
+                    &:after{
+                        width: 4rem;
+                        height: 4rem;
+                        transform: translate(.2rem, .3rem);
+                        @include after-block;
+                    }
+                }
+            }
+            @media (min-width: 825px) {
+                .recommendation{
+                    font-size: 2.5rem;
+                }
+                .cloathes{
+                    .item{
+                        @include flex-collumn;
+                        @include flex-center;
+                        @include base-text(1.7rem);
+                        margin: 0.8rem 1rem;
+                        text-shadow: 4px 4px 7px rgba(0,0,0,0.35);
+                        *{
+                            margin: 0.5rem;
+                        }
+                        .name{
+                            font-size: 1.9rem;
+                            font-weight: 600;
+                        }
+                        &:after{
+                            width: 6rem;
+                            height: 6rem;
+                            transform: translate(1rem, 1rem);
+                        }
+                    }
+                }
+            }
+
+        }
+        @media (min-width: 825px) {
+            margin-top: 4rem;
+        }
+        
+    }
+    footer{
+        position: sticky;
+        height: 45px;
+        width: 100%;
+        top: calc( 100vh - 45px );
+        margin-left: 1rem;
+        @include base-text(1rem);
+        a{
+            align-self: flex-start;
+            text-decoration: none;
+        }
+    }
+}

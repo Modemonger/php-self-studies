@@ -1,0 +1,28 @@
+@mixin after-block {
+    position: absolute;
+    content: "";
+    background-color: #ffe54c;
+    z-index: -1;
+}
+
+@mixin flex-collumn{
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin base-text($size: 1.2rem, $weight: 200, $spacing: 1px) {
+    font-size: $size;
+    font-weight: $weight;
+    letter-spacing: $spacing;
+}
