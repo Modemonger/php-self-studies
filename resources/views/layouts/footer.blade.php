@@ -1,9 +1,9 @@
 <div class="footer-container">
-    <p>
+    <p class="credits">
         Project based on task provided by 
         <a href="https://www.adeoweb.lt/">adeoweb</a>
     </p>
-    <p>
+    <p class="author">
         Made by <a href="">Modestas Stravinskas</a>
     </p>
 </div>

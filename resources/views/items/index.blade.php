@@ -5,9 +5,9 @@
     <h1>What ot take</h1>
 
     @include('layouts/search')
-    
-    @include('items/items')
 
     @include('weather/weather')
+
+    @include('cloathes/cloathes')
 
 @endsection

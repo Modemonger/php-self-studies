@@ -4,7 +4,7 @@
 
         <input type="text" 
             class="form-control" 
-            name="name"
+            name="city"
             placeholder="Search cities"> 
             <span class="input-group-btn">
             <button type="submit" class="btn-default">Submit</button>

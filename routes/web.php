@@ -13,6 +13,4 @@ use App\Http\Controllers\ItemsController;
 |
 */
 
-Route::get('/{name?}', [ItemsController::class, 'index'])->name('home');
-
-Route::resource('/resource', ItemsController::class);
+Route::get('/{city?}', [ItemsController::class, 'index'])->name('home');

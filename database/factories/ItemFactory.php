@@ -26,9 +26,7 @@ class ItemFactory extends Factory
             'sku' => $this->faker->title,
             'name' => $this->faker->name,
             'price' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = NULL),
-            'clear' => $this->faker->boolean(),
-            'cloudy' => $this->faker->boolean(),
-            'rain' => $this->faker->boolean(),
+            'weather' => $this->faker->realText,
             'created_at' => now(),
         ];
     }

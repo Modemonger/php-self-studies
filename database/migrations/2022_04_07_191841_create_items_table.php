@@ -18,9 +18,7 @@ class CreateItemsTable extends Migration
             $table->string('sku');
             $table->string('name');
             $table->double('price', 15, 2);
-            $table->boolean('clear');
-            $table->boolean('cloudy');
-            $table->boolean('rain');
+            $table->string('weather');
             $table->timestamps();
         });
     }

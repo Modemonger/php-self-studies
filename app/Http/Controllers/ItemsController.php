@@ -30,34 +30,57 @@ class ItemsController extends Controller
      */
     public function index(Request $request)
     {
-        $city = $request->name;
+        $city = $request->city;
         $city = strip_tags($city);
         $city = Str::lower($city);
         
-        if (isset($city) && $city != '') {
+        if (isset($city) && $city != '') 
+        {
 
             $response = Http::get('https://api.meteo.lt/v1/places/'.$city.'/forecasts/long-term');
             $response->json();
-            foreach ($response['forecastTimestamps'] as $key => $value) {
+
+            foreach ($response['forecastTimestamps'] as $key => $value) 
+            {
                 $value['forecastTimeUtc'] = new Carbon($value['forecastTimeUtc']);
                 $value['forecastTimeUtc'] = $value['forecastTimeUtc']->setTimeZone('Europe/Vilnius');
             }
 
             $date = array(Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'), 'UTC'));
+            // kinda weird that it stays utc if i try to set timezone on the create from format method
             $date[0] = $date[0]->setTimeZone('Europe/Vilnius');
 
-            $result = array_filter($response['forecastTimestamps'], 
-                function ($datetime) use ($date) {
+            $resault = array_filter($response['forecastTimestamps'], 
+                function ($datetime) use ($date)
+                {
                     return $datetime['forecastTimeUtc'] > $date[0];
                 });
+        
+            $resault = array_slice($resault, 0, 5);
+            
+            $cloathes = array();
+            foreach ($resault as $key => $value) {
+                $item = Item::where('weather',
+                                'like', '%'.Str::after($value['conditionCode'], '-').'%')
+                ->get();
+                
+                foreach ($item as $x)
+                {
+                    if(!in_array($x, $cloathes))
+                    {
+                        array_push($cloathes, $x); 
+                    }
+                }
+            }
 
             $data = [
                 'place'=>$response['place'],
-                'forecastTimestamps'=>array_slice($result, 0, 5),
+                'forecastTimestamps'=>$resault,
+                'cloathes' => $cloathes,
             ];
-
-            return view('items.index',compact('data'));
-        }
+            //dd($data);
+                return view('items.index',compact('data'));
+            }
 
         return view('items.index');
     }
@@ -87,39 +110,14 @@ class ItemsController extends Controller
         ]);
 
         $item = new Item;
+        dd($request);
         $item->sku = SKU_gen($request->input('name'), 2);
         $item->name = $request->input('name');
         $item->price = $request->input('price');
-        $item->clear = $request
-            ->whenHas('clear', function ($input) {
-                if($input == 'on')
-                    return true;
-            
-                return false;
-            }, function () {
-                return false;
-            });
-        $item->cloudy = $request
-            ->whenHas('cloudy', function ($input) {
-                if($input == 'on')
-                    return true;
-            
-                return false;
-            }, function () {
-                return false;
-            });
-        $item->rain = $request
-            ->whenHas('rain', function ($input) {
-                if($input == 'on')
-                    return true;
-            
-                return false;
-            }, function () {
-                return false;
-            });
+        $item->weather = $request->input();
         $item->save();
 
-        return view('items.index');
+        return 'hello';
     }
 
     /**
