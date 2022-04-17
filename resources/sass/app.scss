@@ -45,7 +45,7 @@ body{
                 border: 1px solid black;
                 background-color: transparent;
                 &::-webkit-search-cancel-button{
-                    -webkit-appearance: none;  
+                    -webkit-appearance: none;
                     height: 1em;
                     width: 1em;
                     border-radius: 50em;
@@ -86,9 +86,9 @@ body{
                         transform: translate(-9.3rem, -0.9rem);
                     }
                 }
-                
+
             }
-            
+
         }
         .weather-container{
             @include flex-collumn;
@@ -97,7 +97,7 @@ body{
             margin: 2rem 0;
             &:after{
                 width: 14rem;
-                height: 20rem;
+                height: 4rem;
                 transform: translate(1rem, 1rem);
                 @include after-block;
             }
@@ -118,16 +118,16 @@ body{
                         &:nth-child(even){
                             font-weight: 600;
                             align-self: flex-end;
-                        } 
+                        }
                     }
-                    
+
                 }
             }
             @media (min-width: 825px) {
                 width: 30rem;
                 &:after{
                     width: 30rem;
-                    height: 23rem;
+                    height: 4.5rem;
                 }
                 .city-name{
                     @include base-text(2.5rem, 600)
@@ -145,9 +145,9 @@ body{
                             &:nth-child(even){
                                 font-weight: 600;
                                 align-self: flex-end;
-                            } 
+                            }
                         }
-                        
+
                     }
                 }
             }
@@ -215,7 +215,7 @@ body{
         @media (min-width: 825px) {
             margin-top: 4rem;
         }
-        
+
     }
     footer{
         position: sticky;

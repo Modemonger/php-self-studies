@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link href="{{mix('css/app.css')}}" rel="stylesheet">
     <title>What should i wear</title>
 </head>
 <body>
@@ -13,10 +13,10 @@
     <div class="app">
         @yield('content')
     </div>
-    
+
     @include('layouts/footer')
-   
-    
+
+
 
 </body>
 </html>

@@ -13,7 +13,7 @@ class Item extends Model
 
     protected $primaryKey = 'id';
 
-    protected $hidden = ['created_at', 'updated_at'];
+    protected $hidden = ['id', 'weather' ,'created_at', 'updated_at'];
 
     //protected $fillable = ['name'];
 }

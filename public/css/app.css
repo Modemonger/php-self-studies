@@ -111,7 +111,7 @@ body .app .weather-container {
 }
 body .app .weather-container:after {
   width: 14rem;
-  height: 20rem;
+  height: 4rem;
   transform: translate(1rem, 1rem);
   position: absolute;
   content: "";
@@ -151,7 +151,7 @@ body .app .weather-container .forecast-container .forecast *:nth-child(even) {
   }
   body .app .weather-container:after {
     width: 30rem;
-    height: 23rem;
+    height: 4.5rem;
   }
   body .app .weather-container .city-name {
     font-size: 2.5rem;
