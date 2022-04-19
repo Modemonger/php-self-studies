@@ -217,6 +217,16 @@ body{
         }
 
     }
+    .error{
+        @include flex-center;
+        flex-direction: column;
+        h1{
+            @include base-text(7rem);
+        }
+        *{
+            margin: 1rem 0;
+        }
+    }
     footer{
         position: sticky;
         height: 45px;

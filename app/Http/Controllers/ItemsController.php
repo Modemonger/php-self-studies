@@ -16,14 +16,15 @@ class ItemsController extends Controller
     public function index(Request $request)
     {
         $city = $request->city;
-        $city = strip_tags($city);
-        $city = Str::lower($city);
-        $city = iconv('utf-8', 'ascii//TRANSLIT', $city);
 
         if(isset($city))
         {
             $request = Request::create('/api/products/recommended/'.$city, 'GET');
-            $response = app()->handle($request)->getData();
+            $response = app()->handle($request)->getContent();
+            $response = json_decode($response);
+            if(isset($response->error)){
+                return view('error.error',array('error'=>$response));
+            }
             return view('items.index',array('data'=>$response));
         }
 

@@ -31,8 +31,8 @@ class ApiController extends Controller
                 }
         } catch(\Exception $e){
             //dd($e);
-            $error = $response->getStatusCode();
-            return view('error.error', compact('error'));
+            $error = $response;
+            return $error;
         }
 
         $date = Carbon::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'), 'UTC');

@@ -4,13 +4,13 @@
 
     <div class="error">
 
-        @switch($error)
+        @switch($error->error->code)
             @case(404)
-                <h1>{{ $error }}</h1>
+                <h1>{{ $error->error->code }}</h1>
                 <p>We could not find what you are looking for</p>
                 @break
             @case(500)
-                <h1>{{ $error }}</h1>
+                <h1>{{ $error->error->code }}</h1>
                 <p>The server pooped itself</p>
                 @break
             @default

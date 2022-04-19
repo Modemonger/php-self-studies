@@ -258,6 +258,20 @@ body .app .cloathes-container .cloathes .item:after {
     margin-top: 4rem;
   }
 }
+body .error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+body .error h1 {
+  font-size: 7rem;
+  font-weight: 200;
+  letter-spacing: 1px;
+}
+body .error * {
+  margin: 1rem 0;
+}
 body footer {
   position: -webkit-sticky;
   position: sticky;
