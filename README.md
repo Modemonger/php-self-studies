@@ -56,3 +56,6 @@ Or use the installer from https://getcomposer.org/
     DB_USERNAME=root
     DB_PASSWORD=<your database password if you have one>
     ```
+## After starting
+The API link is ``` http://127.0.0.1:8000/api/products/recommended/:city ``` \
+The page link is ``` http://127.0.0.1:8000 ```
