@@ -269,6 +269,15 @@ body .error h1 {
   font-weight: 200;
   letter-spacing: 1px;
 }
+body .error h1:after {
+  width: 13rem;
+  height: 8rem;
+  transform: translate(-11rem, 1.5rem);
+  position: absolute;
+  content: "";
+  background-color: #ffe54c;
+  z-index: -1;
+}
 body .error * {
   margin: 1rem 0;
 }

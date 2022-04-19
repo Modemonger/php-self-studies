@@ -222,10 +222,17 @@ body{
         flex-direction: column;
         h1{
             @include base-text(7rem);
+            &:after{
+                width: 13rem;
+                height: 8rem;
+                transform: translate(-11rem, 1.5rem);
+                @include after-block;
+            }
         }
         *{
             margin: 1rem 0;
         }
+
     }
     footer{
         position: sticky;
